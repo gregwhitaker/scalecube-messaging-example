@@ -64,19 +64,20 @@ public class Application {
                     .startAwait();
         }
 
-        startGossip(cluster);
+        startGossip(name, cluster);
     }
 
     /**
      * Gossips the integers 1 to 100.
      *
+     * @param name node friendly name
      * @param cluster scalecube cluster
      */
-    public static void startGossip(Cluster cluster) {
+    public static void startGossip(String name, Cluster cluster) {
         Flux.range(1, 100)
                 .delayElements(Duration.ofSeconds(1))
                 .doOnNext(integer -> {
-                    LOG.info("Gossiping: {}", integer);
+                    LOG.info("Gossiping: {}{}", name, integer);
                     cluster.spreadGossip(Message.fromData(integer));
                 })
                 .blockLast();
@@ -89,7 +90,7 @@ public class Application {
      * @return name of the node
      */
     private static String getName(String... args) {
-        if (args.length != 2) {
+        if (args.length < 2) {
             throw new IllegalArgumentException("Missing required arguments: {name} {clusterPort}");
         }
 
@@ -103,7 +104,7 @@ public class Application {
      * @return cluster port of the node
      */
     private static int getClusterPort(String... args) {
-        if (args.length != 2) {
+        if (args.length < 2) {
             throw new IllegalArgumentException("Missing required arguments: {name} {clusterPort}");
         }
 
