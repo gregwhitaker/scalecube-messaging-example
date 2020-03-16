@@ -36,6 +36,11 @@ public class Application {
                     .transport(tc -> tc.port(clusterPort))
                     .handler(cluster1 -> new ClusterMessageHandler() {
                         @Override
+                        public void onMessage(Message message) {
+                            LOG.info("Received Message: {}", message.data().toString());
+                        }
+
+                        @Override
                         public void onGossip(Message gossip) {
                             LOG.info("Received Data: {} from {}:{}", gossip.data().toString(),
                                     gossip.sender().host(), gossip.sender().port());
@@ -44,6 +49,12 @@ public class Application {
                         @Override
                         public void onMembershipEvent(MembershipEvent event) {
                             LOG.info("Membership Event: {}", event.toString());
+
+                            if (event.isAdded()) {
+                                cluster1.members().add(event.member());
+                            } else if (event.isRemoved()) {
+                                cluster1.members().remove(event.member());
+                            }
                         }
                     })
                     .startAwait();
@@ -52,33 +63,46 @@ public class Application {
                     .membership(opts -> opts.seedMembers(seedAddress))
                     .handler(cluster1 -> new ClusterMessageHandler() {
                         @Override
+                        public void onMessage(Message message) {
+                            LOG.info("Received Message: {}", message.data().toString());
+                        }
+
+                        @Override
                         public void onGossip(Message gossip) {
-                            LOG.info("Received: {}", gossip.data().toString());
+                            LOG.info("Received Gossip: {}", gossip.data().toString());
                         }
 
                         @Override
                         public void onMembershipEvent(MembershipEvent event) {
                             LOG.info("Membership Event: {}", event.toString());
+
+                            if (event.isAdded()) {
+                                cluster1.members().add(event.member());
+                            } else if (event.isRemoved()) {
+                                cluster1.members().remove(event.member());
+                            }
                         }
                     })
                     .startAwait();
         }
 
-        startGossip(name, cluster);
+        start(name, cluster);
     }
 
     /**
-     * Gossips the integers 1 to 100.
+     * Sends the integers 1 to 100.
      *
      * @param name node friendly name
      * @param cluster scalecube cluster
      */
-    public static void startGossip(String name, Cluster cluster) {
-        Flux.range(1, 100)
+    public static void start(String name, Cluster cluster) {
+        Flux.range(1, 1000)
                 .delayElements(Duration.ofSeconds(1))
                 .doOnNext(integer -> {
-                    LOG.info("Gossiping: {}{}", name, integer);
-                    cluster.spreadGossip(Message.fromData(integer));
+                    cluster.otherMembers().forEach(member -> {
+                        LOG.info("Sending Message: {}{} to {}", name, integer, member.address());
+                        cluster.send(member, Message.fromData(name + integer));
+                    });
                 })
                 .blockLast();
     }
