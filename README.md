@@ -1,4 +1,18 @@
 # scalecube-gossip-example
+An example of gossiping information between service nodes using [ScaleCube](https://scalecube.io).
+
+## Building the Example
+Run the following command to build the example:
+
+    ./gradlew clean build
+    
+## Running the Example
+Follow the steps below to run the example:
+
+* TBD
+
+## Bugs and Feedback
+For bugs, questions, feedback, and discussions please use the [Github Issues](https://github.com/gregwhitaker/scalecube-gossip-example/issues).
 
 ## License
 MIT License
