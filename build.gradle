@@ -1,0 +1,20 @@
+plugins {
+    id "idea"
+    id "java"
+    id "application"
+}
+
+group = 'com.github.gregwhitaker'
+version = '0.1.0'
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.scalecube:scalecube-cluster:2.4.10'
+
+    runtime 'org.slf4j:slf4j-simple:1.7.30'
+}
