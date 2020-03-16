@@ -37,7 +37,8 @@ public class Application {
                     .handler(cluster1 -> new ClusterMessageHandler() {
                         @Override
                         public void onGossip(Message gossip) {
-                            LOG.info("Received Data: {}", gossip.data().toString());
+                            LOG.info("Received Data: {} from {}:{}", gossip.data().toString(),
+                                    gossip.sender().host(), gossip.sender().port());
                         }
 
                         @Override
