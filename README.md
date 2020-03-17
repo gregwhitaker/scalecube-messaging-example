@@ -23,7 +23,7 @@ between one another:
     [sc-cluster-io-nio-1] INFO example.scalecube.messaging.Service - [Sally] Received Message: 'Bob59' from '192.168.254.49:7001'
 
 ## Bugs and Feedback
-For bugs, questions, feedback, and discussions please use the [Github Issues](https://github.com/gregwhitaker/scalecube-gossip-example/issues).
+For bugs, questions, feedback, and discussions please use the [Github Issues](https://github.com/gregwhitaker/scalecube-messaging-example/issues).
 
 ## License
 MIT License
