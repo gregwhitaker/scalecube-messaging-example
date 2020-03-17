@@ -7,6 +7,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Runs the example.
+ */
 public class ExampleRunner {
     private static final Logger LOG = LoggerFactory.getLogger(ExampleRunner.class);
 

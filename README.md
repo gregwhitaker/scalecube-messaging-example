@@ -1,5 +1,5 @@
-# scalecube-gossip-example
-An example of gossiping information between service nodes using [ScaleCube](https://scalecube.io).
+# scalecube-messaging-example
+An example of sending information between service nodes using [ScaleCube](https://scalecube.io).
 
 ## Building the Example
 Run the following command to build the example:
@@ -7,9 +7,20 @@ Run the following command to build the example:
     ./gradlew clean build
     
 ## Running the Example
-Follow the steps below to run the example:
+Run the following command to execute the example application:
 
-* TBD
+    ./gradlew run
+    
+If successful, you will see `3` services start with a `10` second interval in between them and they will start sending messages
+between one another:
+
+    [sc-cluster-io-nio-1] INFO example.scalecube.messaging.Service - [Sally] Received Message: 'Bob3' from '192.168.254.49:7001'
+    [sc-cluster-io-nio-1] INFO example.scalecube.messaging.Service - [Carol] Received Message: 'Bob27' from '192.168.254.49:7001'
+    [sc-cluster-io-nio-1] INFO example.scalecube.messaging.Service - [Bob] Received Message: 'Sally4' from '192.168.254.49:50683'
+    [sc-cluster-io-nio-1] INFO example.scalecube.messaging.Service - [Carol] Received Message: 'Sally16' from '192.168.254.49:50683'
+    [sc-cluster-io-nio-1] INFO example.scalecube.messaging.Service - [Bob] Received Message: 'Carol30' from '192.168.254.49:50677'
+    [sc-cluster-io-nio-1] INFO example.scalecube.messaging.Service - [Sally] Received Message: 'Carol53' from '192.168.254.49:50677'
+    [sc-cluster-io-nio-1] INFO example.scalecube.messaging.Service - [Sally] Received Message: 'Bob59' from '192.168.254.49:7001'
 
 ## Bugs and Feedback
 For bugs, questions, feedback, and discussions please use the [Github Issues](https://github.com/gregwhitaker/scalecube-gossip-example/issues).

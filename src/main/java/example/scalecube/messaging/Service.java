@@ -18,6 +18,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Service that clusters using ScaleCube and then sends messages to cluster members.
+ */
 public class Service implements Runnable {
     private static final Logger LOG = LoggerFactory.getLogger(Service.class);
 

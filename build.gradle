@@ -6,6 +6,7 @@ plugins {
 
 group = 'com.github.gregwhitaker'
 version = '0.1.0'
+mainClassName = 'example.scalecube.messaging.ExampleRunner'
 sourceCompatibility = 1.8
 
 repositories {
