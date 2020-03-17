@@ -18,6 +18,7 @@ public class ExampleRunner {
     public static void main(String... args) throws Exception {
         LOG.info("Starting the Example...");
 
+        // Seed node
         Service bob = Service.builder()
                 .friendlyName("Bob")
                 .port(7001)
