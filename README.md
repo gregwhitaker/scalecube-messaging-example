@@ -1,4 +1,6 @@
 # scalecube-messaging-example
+![Build](https://github.com/gregwhitaker/scalecube-messaging-example/workflows/Build/badge.svg)
+
 An example of sending information between service nodes using [ScaleCube](https://scalecube.io).
 
 ## Building the Example
